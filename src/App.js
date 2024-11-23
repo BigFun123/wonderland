@@ -13,7 +13,7 @@ function App() {
 
   function search(url) {
     console.log('searching...')
-    fetch(`http://localhost:8080/wonderland/search/wonderland😏/${url}`)
+    fetch(`https://usermetrics.net/wonderland/search/wonderland😏/${url}`)
       .then(response => response.json())
       .then(data => setResults(data.results))
       .catch(error => console.error(error));
@@ -21,7 +21,7 @@ function App() {
 
   function submit(url) {
     console.log('submitting...')
-    fetch('http://localhost:8080/wonderland/add', {
+    fetch('https://usermetrics.net/wonderland/add', {
       headers: {
         'Content-Type': 'application/json'
       },
