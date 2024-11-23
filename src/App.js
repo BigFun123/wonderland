@@ -3,6 +3,7 @@ import { useState } from 'react';
 import Admin from './pages/admin';
 import Main from './pages/main';
 import Submit from './pages/submit';
+import Logo from './components/logo/logo';
 
 function App() {
 
@@ -45,9 +46,13 @@ function App() {
   return (
     <div className="App">
       <div className="menu">
+        <img src="/rabbit.png" alt="rabbit" width="32"/>
+        <Logo></Logo>
+        <div className='spaceout'>  </div>
+        <button onClick={() => setPage("main")}>Home</button>
         <button onClick={() => setPage("submit")}>Submit a site</button>
         {/* <button onClick={() => setPage("admin")}>Admin</button> */}
-        <button onClick={() => setPage("main")}>Main</button>
+        
       </div>
       <header className="App-header">
         {/* {page === "admin" && <Admin />} */}
