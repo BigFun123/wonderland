@@ -12,8 +12,9 @@ function Submit(options) {
     }
 
     return (
+
         <div className='flexbox'>
-            <input type="text" id="url" onChange={onInput} />
+            <input type="text" id="url" onChange={onInput} placeholder='full url, e.g. http://myamazingblog.com' />
             <button className="button2" onClick={submit}>Submit</button>
         </div>
     );

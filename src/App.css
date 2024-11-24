@@ -41,6 +41,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  min-width: 50%;
 }
 
 a {
@@ -70,6 +71,10 @@ button {
   font-size: 16px;
   margin: 4px 2px;
   cursor: pointer;
+}
+
+p {
+  font-size: 12px;
 }
 
 .button2 {
@@ -104,4 +109,23 @@ button:hover {
 
 .spaceout {
   flex: 10;
+}
+
+.topsearch {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: #282c34;
+  margin-top: 20px;
+  padding: 10px;
+
+}
+
+.searchresult {
+  display: flex;
+}
+
+.searchresult img {
+  margin-right: 10px;
 }

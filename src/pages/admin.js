@@ -11,7 +11,7 @@ function Admin(options) {
                 'Content-Type': 'application/json'
             },
             method: "POST",
-            body: JSON.stringify({ url: url }),
+            body: JSON.stringify({ link: url }),
         })
             .then(response => response.json())
             .then(data => {

@@ -1,5 +1,5 @@
 import './App.css';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Admin from './pages/admin';
 import Main from './pages/main';
 import Submit from './pages/submit';
@@ -10,10 +10,20 @@ function App() {
   const [results, setResults] = useState([]);
   const [page, setPage] = useState("main");
   const [message, setMessage] = useState("");
+  const [isAdmin, setIsAdmin] = useState(false);
+
+  const site = "http://localhost:8080";
+
+  useEffect(() => {
+    // get querystring param isadmin
+    const urlParams = new URLSearchParams(window.location.search);
+    setIsAdmin(urlParams.get('isadmin') == "1");
+
+  }, []);
 
   function search(url) {
     console.log('searching...')
-    fetch(`https://usermetrics.net/wonderland/search/wonderland😏/${url}`)
+    fetch(`${site}/wonderland/search/wonderland😏/${url}`)
       .then(response => response.json())
       .then(data => setResults(data.results))
       .catch(error => console.error(error));
@@ -21,12 +31,12 @@ function App() {
 
   function submit(url) {
     console.log('submitting...')
-    fetch('https://usermetrics.net/wonderland/add', {
+    fetch(`${site}/wonderland/submit/wonderland😏`, {
       headers: {
         'Content-Type': 'application/json'
       },
       method: "POST",
-      body: JSON.stringify({ url: url }),
+      body: JSON.stringify({ link: url }),
     })
       .then(response => response.json())
       .then(data => {
@@ -38,27 +48,30 @@ function App() {
   }
 
   function renderResults() {
-    return results.map(result => {
-      return <div><a href={result.link}>{result.title}</a></div>
-    })
+    return <div>
+      {results.map(result => {
+        return <div className='searchresult'><img src={result.icon} width="32" alt="" /> <a href={result.link}>{result.title}</a></div>
+      })}
+    </div>
   }
 
   return (
     <div className="App">
       <div className="menu">
-        <img src="/rabbit.png" alt="rabbit" width="32"/>
+        <img src="/rabbit.png" alt="rabbit" width="32" />
         <Logo></Logo>
         <div className='spaceout'>  </div>
-        <button onClick={() => setPage("main")}>Home</button>
-        <button onClick={() => setPage("submit")}>Submit a site</button>
-        {/* <button onClick={() => setPage("admin")}>Admin</button> */}
-        
+        <button onClick={() => { setPage("main"); setMessage("") }}>Home</button>
+        <button onClick={() => { setPage("submit"); setMessage("") }}>Submit a site</button>
+        {isAdmin && <button onClick={() => setPage("admin")}>Admin</button>}
+
       </div>
+      {results.length && page === "main" && <div className='topsearch'><Main onSearch={search} /> </div>}
       <header className="App-header">
-        {/* {page === "admin" && <Admin />} */}
+        {isAdmin && page === "admin" && <Admin />} 
         {page === "submit" && <Submit onSubmit={submit} />}
-        {page === "main" && <Main onSearch={search} />}
-        {page === "main" && renderResults()}
+        {!results.length && page === "main" && <Main onSearch={search} />}
+        {results.length && page === "main" && renderResults()}
         <div>{message}</div>
 
       </header>
