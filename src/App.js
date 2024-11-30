@@ -12,12 +12,27 @@ function App() {
   const [message, setMessage] = useState("");
   const [isAdmin, setIsAdmin] = useState(false);
 
-  const site = "http://localhost:8080";
+  const site = "https://usermetrics.net";
+  let banned = [];
 
   useEffect(() => {
     // get querystring param isadmin
     const urlParams = new URLSearchParams(window.location.search);
     setIsAdmin(urlParams.get('isadmin') == "1");
+
+    banned.push('amazon.com');
+    banned.push('bing.com');
+    banned.push('cloudflare.com');
+    banned.push('facebook.com');
+    banned.push('google.com');
+    banned.push('handle.net');
+    banned.push('sucuri.net');
+    banned.push('twitter.com');
+    banned.push('yahoo.com');
+    banned.push('w3.org');
+    banned.push('wikipedia.org');
+    banned.push('x.com');
+    banned.push('youtube.com');
 
   }, []);
 
@@ -31,6 +46,18 @@ function App() {
 
   function submit(url) {
     console.log('submitting...')
+
+    // get the host from the url
+    const hostname = new URL(url).hostname;
+    if (!hostname) {
+      setMessage("Could not parse hostname");
+      return;
+    }
+    if (banned.some(str => hostname.includes(str))) {
+      setMessage("This host is not allowed. Submit personal sites!");
+      return;
+    }
+
     fetch(`${site}/wonderland/submit/wonderland😏`, {
       headers: {
         'Content-Type': 'application/json'
@@ -61,17 +88,18 @@ function App() {
         <img src="/rabbit.png" alt="rabbit" width="32" />
         <Logo></Logo>
         <div className='spaceout'>  </div>
+        <button onClick={() => { window.location = "https://chess.wonderland.social" }}>Play Chess</button>
+        <button onClick={() => { window.location = "https://goplay.wonderland.social" }}>GoPlay™</button>
         <button onClick={() => { setPage("main"); setMessage("") }}>Home</button>
         <button onClick={() => { setPage("submit"); setMessage("") }}>Submit a site</button>
         {isAdmin && <button onClick={() => setPage("admin")}>Admin</button>}
-
       </div>
       {results.length && page === "main" && <div className='topsearch'><Main onSearch={search} /> </div>}
       <header className="App-header">
-        {isAdmin && page === "admin" && <Admin />} 
+        {isAdmin && page === "admin" && <Admin />}
         {page === "submit" && <Submit onSubmit={submit} />}
         {!results.length && page === "main" && <Main onSearch={search} />}
-        {results.length && page === "main" && renderResults()}
+        {results.length > 0 && page === "main" && renderResults()}
         <div>{message}</div>
 
       </header>
