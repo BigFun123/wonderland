@@ -14,8 +14,7 @@
 }
 
 .App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+  background-color: #282c34;  
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -86,18 +85,26 @@ button:hover {
 }
 
 .logo {
+  display: flex;
   width: 100px;  
   margin: 0 auto;
   flex:1;
   align-self: flex-start;
+  align-items: center;
   font-size: 32px;
   font-weight: bold;
   padding: 4px;
   color:#006eff;
+  cursor: pointer;
+}
+
+.logoimage {
+  width: 100px;
 }
 
 .menu {
   display: flex;
+  flex-direction: row;
   justify-content: center;
   align-items: center;
   flex-direction: row;
@@ -105,10 +112,11 @@ button:hover {
   padding: 0;
   margin: 0;
   list-style: none;
+  background-color: white;
 }
 
 .spaceout {
-  flex: 10;
+  flex: 2;
 }
 
 .topsearch {
@@ -122,10 +130,34 @@ button:hover {
 
 }
 
+.toplogo {
+  display: flex;
+  flex-direction: row;
+  
+  align-items: center;
+  width: 90%;
+  flex:1;
+}
+
 .searchresult {
   display: flex;
 }
 
 .searchresult img {
   margin-right: 10px;
+}
+
+@media screen and (max-width: 600px) {
+  .searchresult img {
+    width: 100px;
+  }
+
+  .menu {
+    flex-direction: column;
+  }
+
+  button {
+    width: 80%;
+  }
+  
 }
