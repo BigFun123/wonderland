@@ -1,3 +1,7 @@
 {
-    "liveServer.settings.root": "build"
+    "liveServer.settings.root": "build",
+    "appService.zipIgnorePattern": [
+        "node_modules{,/**}",
+        ".vscode{,/**}"
+    ]
 }

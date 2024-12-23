@@ -29,7 +29,8 @@ function WaitingList() {
   
 
         const hostname = process.env.REACT_APP_HOSTNAME;
-        const result = await fetch(`http://localhost:8080/goplay/waitinglist`, {
+        //http://localhost:8080
+        const result = await fetch(`${hostname}/goplay/waitinglist`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
