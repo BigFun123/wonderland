@@ -20,7 +20,7 @@ function WaitingList({saveRegistered}) {
     const handleSubmit = async (e) => {
         e.preventDefault();
         
-        const gameType = document.querySelector('input[name="gameType"]:checked').value;        
+        const gameType = document.querySelector('input[name="gameType"]:checked').value;
         const hostname = process.env.REACT_APP_HOSTNAME;
         const result = await fetch(`${hostname}/goplay/waitinglist`, {
             method: 'POST',
@@ -32,9 +32,11 @@ function WaitingList({saveRegistered}) {
             .then(response => response.json())
             .then(data => {
                 console.log('Success:', data);
-                setMessage(data.message);
-                saveRegistered();
+                setMessage(data.message);                
                 setSent(true);
+                setTimeout(() => {
+                    saveRegistered();
+                }, 4000);
             })
             .catch((error) => {
                 console.error('Error:', error);
