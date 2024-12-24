@@ -1,4 +1,7 @@
-function Menu() {
+import { useEffect, useState } from "react";
+import Logo from "./logo/logo";
+
+function Menu({ setPage, registered }) {
 
     const [isAdmin, setIsAdmin] = useState(false);
 
@@ -10,12 +13,16 @@ function Menu() {
 
 
     return (
-        <div className="Menu">
-            <button onClick={() => { window.location = "https://chess.wonderland.social" }}>Play Chess</button>
-            <button onClick={() => { window.location = "https://goplay.wonderland.social" }}>GoPlay Outside™</button>
-            <button onClick={() => { window.location = "https://search.wonderland.social" }}>Wonderland Search</button>
-            {isAdmin && <button onClick={() => setPage("admin")}>Admin</button>}
-            <button onClick={() => { setPage("submit"); setMessage("") }}>Submit a site</button>
+        <div className="menu">
+            <Logo onClick={() => setPage("main")}></Logo>
+            {registered &&
+                <div>
+                    <button onClick={() => { window.location = "https://chess.wonderland.social" }}>Play Chess</button>
+                    <button onClick={() => { window.location = "https://goplay.wonderland.social" }}>GoPlay Outside™</button>
+                    <button onClick={() => { window.location = "https://search.wonderland.social" }}>Wonderland Search</button>
+                    {isAdmin && <button onClick={() => setPage("admin")}>Admin</button>}
+                </div>
+            }
         </div>
     );
 }

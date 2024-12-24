@@ -10,7 +10,7 @@ import React, { useState } from 'react';
  * @returns 
  */
 
-function WaitingList() {
+function WaitingList({saveRegistered}) {
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [location, setLocation] = useState('');
@@ -33,6 +33,7 @@ function WaitingList() {
             .then(data => {
                 console.log('Success:', data);
                 setMessage(data.message);
+                saveRegistered();
                 setSent(true);
             })
             .catch((error) => {

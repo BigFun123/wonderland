@@ -57,7 +57,7 @@ function Search(options) {
 
     return (
         <div>            
-            <header className="App-header">
+            <header className="App-header">            
                 {isAdmin && page === "admin" && <Admin />}
                 {page === "submit" && <Submit onSubmit={submit} />}                
                 <div>{message}</div>

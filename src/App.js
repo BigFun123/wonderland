@@ -4,6 +4,7 @@ import Main from './pages/main';
 
 import Logo from './components/logo/logo';
 import WaitingList from './pages/waitinglist';
+import Menu from './components/menu';
 
 let banned = [];
 banned.push('bing.com');
@@ -22,15 +23,30 @@ banned.push('youtube.com');
 
 function App() {
   const [page, setPage] = useState("main");
+  const [registered, setRegistered] = useState(false);
+
+  useEffect(() => {
+    isRegistered();
+  }, []);
+
+  function isRegistered() {
+    const signedup = localStorage.getItem('wonderland-signup');
+    if (signedup) {
+      setRegistered(true);
+      return true;
+    }
+  }
+
+  function saveRegistered() {
+    setRegistered(true);
+    localStorage.setItem('wonderland-signup', 'true');
+  }
 
   return (
     <div className="App">
-      <div className="menu">        
-        <Logo onClick={() => setPage("main")}></Logo>        
-        <div className='spaceout'>  </div>        
-      </div>      
+      <Menu setPage={setPage} registered={registered}></Menu>
       {page === "search" && <Main onSearch={() => setPage("search")} />}
-      {page === "main" && <WaitingList />}
+      {page === "main" && !registered && <WaitingList saveRegistered={saveRegistered} />}
     </div>
   );
 }
