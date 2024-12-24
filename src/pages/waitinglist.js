@@ -19,17 +19,9 @@ function WaitingList() {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        // Handle form submission logic here
-        console.log('Name:', name);
-        console.log('Email:', email);
-        console.log('Location:', location);
-        // get the radio choice for gameType
-        const gameType = document.querySelector('input[name="gameType"]:checked').value;
-        console.log('Game Type:', gameType);
-  
-
+        
+        const gameType = document.querySelector('input[name="gameType"]:checked').value;        
         const hostname = process.env.REACT_APP_HOSTNAME;
-        //http://localhost:8080
         const result = await fetch(`${hostname}/goplay/waitinglist`, {
             method: 'POST',
             headers: {
@@ -49,15 +41,15 @@ function WaitingList() {
     };
 
     function renderForm() {
-        return (<div>            
+        return (<div>
             <div className='pane'>
-                <h3>We're turning the world into a geo game you play on your phone</h3>
-                <h2>Walking | Driving | Bookwalks | Tours | Exploration</h2>
-                <br></br>
-                <h1>Join the Waiting List</h1>
+                <h1>We're turning the outdoors into a game you play on your phone</h1>                
+                <h2>Geo Games | Bookwalks</h2>
+                <h2>Guided Tours | Exploration</h2>
             </div>
 
             <div className='flexbox pane'>
+                <h1>Join the Waiting List</h1>
                 <form onSubmit={handleSubmit}>
                     <div className='form-group'>
                         <label>Name</label>
@@ -86,7 +78,7 @@ function WaitingList() {
                         />
                     </div>
                     <div className='waiting-type-list'>
-                        <label>Which type of game are you most looking forward to?</label>
+                        <label>Which type of geo game are you most looking forward to?</label>
                         <div className='form-group'>
                             <input type='radio' id='walking' name='gameType' value='walking' required />
                             <label htmlFor='walking'>Walking games</label>
@@ -108,7 +100,7 @@ function WaitingList() {
                             <label htmlFor='tours'>Guided Tours</label>
                         </div>
                     </div>
-                    <button type='submit'>Sign Up</button>
+                    <button type='submit'>Join</button>
                 </form>
             </div>
         </div>);
@@ -116,7 +108,7 @@ function WaitingList() {
 
     return (
         <div className='waitinglist'>
-            {message && <div className='pane'><div className="innerpane">{message}</div></div>}            
+            {message && <div className='pane'><div className="innerpane">{message}</div></div>}
             {!sent && renderForm()}
         </div>
     );
