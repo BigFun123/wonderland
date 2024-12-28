@@ -12,9 +12,8 @@ function Main(options) {
     }
 
     return (
-        <div className='flexbox'>
-            <input type="text" id="url" onChange={onInput} />
-            <button onClick={search}>Search</button>
+        <div className='flexbox waitinglist'>
+           <h1 className='shadow'>COMING SOON</h1>
         </div>
     );
 }

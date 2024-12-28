@@ -47,6 +47,7 @@ function App() {
       <Menu setPage={setPage} registered={registered}></Menu>
       {page === "search" && <Main onSearch={() => setPage("search")} />}
       {page === "main" && !registered && <WaitingList saveRegistered={saveRegistered} />}
+      {page === "main" && registered && <Main onSearch={() => setPage("search")} />}
     </div>
   );
 }

@@ -77,6 +77,10 @@ h1 {
   margin: 0;
 }
 
+.shadow {
+  text-shadow: 2px 2px 4px #000000;
+}
+
 h2 {
   font-size: 20px;
   margin: 0;
