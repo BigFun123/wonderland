@@ -10,16 +10,18 @@ import React, { useState } from 'react';
  * @returns 
  */
 
-function WaitingList({saveRegistered}) {
+function WaitingList({ saveRegistered }) {
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [location, setLocation] = useState('');
     const [sent, setSent] = useState(false);
     const [message, setMessage] = useState('');
 
+    
+
     const handleSubmit = async (e) => {
         e.preventDefault();
-        
+
         const gameType = document.querySelector('input[name="gameType"]:checked').value;
         const hostname = process.env.REACT_APP_HOSTNAME;
         const result = await fetch(`${hostname}/goplay/waitinglist`, {
@@ -32,7 +34,7 @@ function WaitingList({saveRegistered}) {
             .then(response => response.json())
             .then(data => {
                 console.log('Success:', data);
-                setMessage(data.message);                
+                setMessage(data.message);
                 setSent(true);
                 setTimeout(() => {
                     saveRegistered();
@@ -43,10 +45,17 @@ function WaitingList({saveRegistered}) {
             });
     };
 
+    function renderInvite() {
+        return (<div className='pane'>
+            <h1>Thank you for joining the waiting list</h1>
+            <h2>We will notify you when the game is ready</h2>
+            <p>In the meantime, join our <a href="https://discord.gg/SCjptm2e">Discord Server </a></p>
+        </div>);
+    }
     function renderForm() {
         return (<div>
             <div className='pane'>
-                <h1>We're turning the outdoors into a game you play on your phone</h1>                
+                <h1>We're turning the outdoors into a game you play on your phone</h1>
                 <h2>Geo Games | Bookwalks</h2>
                 <h2>Guided Tours | Exploration</h2>
             </div>
@@ -113,6 +122,7 @@ function WaitingList({saveRegistered}) {
         <div className='waitinglist'>
             {message && <div className='pane'><div className="innerpane">{message}</div></div>}
             {!sent && renderForm()}
+            {sent && renderInvite()}
         </div>
     );
 }

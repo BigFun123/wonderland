@@ -13,7 +13,7 @@ function Main(options) {
 
     return (
         <div className='flexbox waitinglist'>
-           <h1 className='shadow'>COMING SOON</h1>
+           <h1 className='shadow'>Play Outside. Play Chess. Chat with Genie. Play Wartorn.</h1>
         </div>
     );
 }

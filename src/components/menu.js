@@ -17,8 +17,11 @@ function Menu({ setPage, registered }) {
             <Logo onClick={() => setPage("main")}></Logo>
             {registered &&
                 <div>
-                    <button onClick={() => { window.location = "https://goplay.wonderland.social" }}>GoPlay Outside™</button>
+                    <button onClick={() => { window.location = "https://discord.gg/SCjptm2e" }}>Join our Discord</button>
+                    <button onClick={() => { window.location = "https://goplay.wonderland.social" }}>GoPlay Outside™ Beta</button>
                     <button onClick={() => { window.location = "https://chess.wonderland.social" }}>Play Chess</button>                    
+                    <button onClick={() => { window.location = "https://genie.wonderland.social" }}>Chat with Genie</button>                    
+                    
                     {/* <button onClick={() => { window.location = "https://search.wonderland.social" }}>Wonderland Search</button> */}
                     {isAdmin && <button onClick={() => setPage("admin")}>Admin</button>}
                 </div>

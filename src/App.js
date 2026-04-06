@@ -1,9 +1,7 @@
 import './App.css';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import Main from './pages/main';
 
-import Logo from './components/logo/logo';
-import WaitingList from './pages/waitinglist';
 import Menu from './components/menu';
 
 let banned = [];
@@ -23,31 +21,12 @@ banned.push('youtube.com');
 
 function App() {
   const [page, setPage] = useState("main");
-  const [registered, setRegistered] = useState(false);
-
-  useEffect(() => {
-    isRegistered();
-  }, []);
-
-  function isRegistered() {
-    const signedup = localStorage.getItem('wonderland-signup');
-    if (signedup) {
-      setRegistered(true);
-      return true;
-    }
-  }
-
-  function saveRegistered() {
-    setRegistered(true);
-    localStorage.setItem('wonderland-signup', 'true');
-  }
 
   return (
     <div className="App">
-      <Menu setPage={setPage} registered={registered}></Menu>
+      <Menu setPage={setPage} registered={true}></Menu>
       {page === "search" && <Main onSearch={() => setPage("search")} />}
-      {page === "main" && !registered && <WaitingList saveRegistered={saveRegistered} />}
-      {page === "main" && registered && <Main onSearch={() => setPage("search")} />}
+      {page === "main" && <Main onSearch={() => setPage("search")} />}
     </div>
   );
 }
