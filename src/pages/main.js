@@ -1,15 +1,6 @@
-import React, { useState } from 'react';
+import React from 'react';
 
-function Main(options) {
-    const [url, setUrl] = useState('');
-
-    function onInput(e) {
-        setUrl(e.target.value);
-    }
-
-    function search() {
-        options.onSearch(url);
-    }
+function Main(options) {    
 
     return (
         <div className='flexbox waitinglist'>
